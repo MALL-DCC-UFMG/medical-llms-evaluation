@@ -11,7 +11,7 @@ We will continue to update this list with most recent resources. If you find any
 
 ## Survey paper
 
-[**Evaluation of Medical Large Language Models - Taxonomy, Review, and Directions**](papers/p0.pdf) (submitted to IJCAI'25 Survey Track)
+[**Evaluation of Medical Large Language Models - Taxonomy, Review, and Directions**](p0.pdf) (submitted to IJCAI'25 Survey Track)
 
 ## Overview of Medical LLMs Evaluation
 
