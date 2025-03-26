@@ -32,34 +32,73 @@ We will continue to update this list with most recent resources. If you find any
 
 ## Evaluation settings
 
+---
+
 ### Datasets
+
+---
 
 | Dataset                                                                            | Description                                                                                      | Official Website                                                                                                    | 
 |:-----------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
 | MIMIC-III Clinical Database				 | Deidentified health data associated with ~40,000 critical care patients.													|	[MIMIC-III](https://physionet.org/content/mimiciii/1.4/)																					  |							 
 | MIMIC-IV | An update to MIMIC-III, containing deidentified data associated with patients admitted to a tertiary academic medical center in Boston, MA, USA | [MIMIC-IV](https://physionet.org/content/mimiciv/2.2/) | |
 | MIMIC-CDM | A MIMIC-IV Derived Dataset for Evaluation of Large Language Models on the Task of Clinical Decision Making for Abdominal Pathologies | [MIMIC-CDM](https://www.physionet.org/content/mimic-iv-ext-cdm/1.0/) |
-| PathVQA                               									 | VQA, 32799 Cases QA Pair                                                                         | [Grand Challenge](https://pathvqachallenge.grand-challenge.org/)               																			|    
-| SLAKE                                   									 | VQA, 14028  Cases QA Pair                                                                        | [Project Homepage](https://www.med-vqa.com/slake/)                                                                  | 
+| PathVQA                               									 | A visual question answering dataset based on pathology images, where questions are asked about medical images and answers are grounded in visual and clinical understanding.                                                                         | [Grand Challenge](https://pathvqachallenge.grand-challenge.org/)               																			|    
+| SLAKE                                   									 | A medical visual question answering dataset that combines radiology images with clinically relevant questions to evaluate reasoning over both text and image content.                                                                       | [Project Homepage](https://www.med-vqa.com/slake/)                                                                  | 
 | MEDALIGN | A clinician-generated dataset for instruction following with electronic medical records. | [MEDALIGN](https://som-shahlab.github.io/medalign-website/) |
 | ProbSum | The task contains 768 hospital daily progress notes and 2783 diagnoses in the training set, and a new set of 237 daily progress notes are recently annotated as the test set.  | [ProbSum](https://physionet.org/content/task-1-3-soap-note-tag/1.0.0/) | 
-| ICD Billing Codes | | |
-| ACI-Bench | | |
-| MTS - Dialog | | |
-| PriMock57 | | |
-| MedQA-USMLE | | |
-| Medical Flash Cards | | |
-| PubMedQA                                              	 | QA, 1000 Cases Expert annotation QA Pair                         																| [Project Homepage](https://pubmedqa.github.io/)                                																			|
-| NCBI Disease | | |
-| S2ORC | | |
+| ICD Billing Codes | A dataset containing medical diagnoses mapped to ICD (International Classification of Diseases) codes, typically used for billing and administrative purposes. | [Homepage](https://github.com/anand-subu/automated-clinical-coding-llm) |
+| ACI-Bench | A benchmark dataset for evaluating AI models on clinical information extraction tasks, such as named entity recognition and relation extraction in medical records. | [Homepage](https://github.com/wyim/aci-bench/) |
+| MTS - Dialog | A medical task-specific dialogue dataset designed for training and evaluating models in multi-turn medical conversations, often between patients and virtual agents. | [Homepage](https://github.com/abachaa/MTS-Dialog) |
+| PriMock57 | A synthetic dataset of primary care clinical notes, created to mimic real patient encounters while preserving privacy; useful for clinical NLP tasks. | [Homepage](https://github.com/babylonhealth/primock57) |
+| MedQA-USMLE | A large-scale dataset of USMLE-style multiple-choice questions used to assess the medical knowledge of AI models, based on actual exam formats for medical licensing in the U.S. | [Homepage](https://huggingface.co/datasets/GBaker/MedQA-USMLE-4-options) |
+| Medical Flash Cards | A dataset consisting of question-answer flashcards covering key medical topics, used for study and retrieval-based QA in medical domains. | [Homepage](https://huggingface.co/datasets/medalpaca/medical_meadow_medical_flashcards) |
+| PubMedQA                                              	 | A biomedical question answering dataset derived from PubMed abstracts, where models must answer yes/no/maybe questions based on scientific literature.                         																| [Project Homepage](https://pubmedqa.github.io/)                                																			|
+| NCBI Disease | A biomedical named entity recognition dataset focused on identifying disease mentions in PubMed abstracts and linking them to standardized disease concepts. | [Homepage](https://github.com/spyysalo/ncbi-disease) |
+| S2ORC | A large corpus of scholarly articles with full text, covering multiple domains including biomedical research; supports tasks like citation analysis, summarization, and information extraction. | [Homepage](https://github.com/allenai/s2orc) |
 | ORBIT-Surgical | Physics-based surgical robot simulation framework with photorealistic rendering in NVIDIA Omniverse. | [ORBIT-Surgical](https://orbit-surgical.github.io/) |
 | SMM4H | Medication-related text classification and concept normalization from Twitter | [SMM4H](https://data.mendeley.com/datasets/rxwfb3tysd/2) |
 | COMETA | Entity linking dataset of layman medical terminology. | [COMETA](https://github.com/cambridgeltl/cometa) |
 
+---
+
 ### Metrics
 
+---
+
+Evaluating Large Language Models (LLMs) involves a combination of automatic and human-centered metrics, depending on the task (e.g., text generation, QA, summarization). Here are the most commonly used metrics:
+
+### 🔤 **Text Generation / Completion**
+- **Perplexity**: Measures how well a model predicts the next token. Lower is better. Common in language modeling.
+- **BLEU** (Bilingual Evaluation Understudy): Evaluates overlap between generated and reference text using n-gram precision. Common in translation tasks.
+- **ROUGE** (Recall-Oriented Understudy for Gisting Evaluation): Focuses on recall of overlapping n-grams. Common in summarization.
+- **METEOR**: Considers synonym matching and stemming; often complements BLEU/ROUGE.
+
+### ❓ **Question Answering**
+- **Exact Match (EM)**: Measures if the generated answer matches the ground truth exactly.
+- **F1 Score**: Harmonic mean of precision and recall at the token level; useful for partial correctness.
+- **Accuracy**: Measures how often the model provides the correct answer, especially for multiple-choice questions.
+
+### 💬 **Dialog / Conversational Agents**
+- **BLEU / ROUGE / METEOR**: Still used, though not always well-aligned with human judgment in open-ended dialogue.
+- **BERTScore**: Uses contextual embeddings to compare similarity between generated and reference sentences.
+- **Human Evaluation**: Assesses coherence, relevance, helpfulness, and safety of responses.
+
+### 🧠 **Reasoning / Complex Tasks**
+- **Chain-of-Thought Accuracy**: Evaluates both the reasoning steps and final answer.
+- **Faithfulness**: Measures whether the model-generated answer is grounded in provided sources (important in QA and summarization).
+- **Pass@k**: In code generation tasks, measures the chance that at least one of the top-k outputs is correct.
+
+### 🔍 **Other Metrics**
+- **Toxicity / Bias Scores**: Evaluates safety and fairness of outputs (e.g., using tools like Perspective API).
+- **Latency / Throughput**: Important for real-time or large-scale deployment.
+- **Calibration**: Measures how well the model's confidence matches its accuracy.
+
+---
 
 ## Medical Applications
+
+---
 
 1. ### Clinical Decision Support and Diagnosis
    
